@@ -2,7 +2,7 @@
 session_start();
 require 'db.php';
 
-$error = ""; // Initialize error variable
+$error = ""; 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = trim($_POST['username']);

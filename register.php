@@ -2,6 +2,8 @@
 session_start();
 require 'db.php';
 
+$error = ""; // Initialize error variable
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
@@ -38,6 +40,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             margin: 0;
         }
         .register-container {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+        .register-container h2 {
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .register-container label {
+            display: block;
+            margin-top: 0.5rem;
+        }
+        .register-container input {
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 0.25rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .register-container button {
+            width: 100%;
+            padding: 0.75rem;
+            margin-top: 1rem;
+            background: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .register-container button:hover {
+            background: #2980b9;
+        }
         .login-link {
             text-align: center;
             margin-top: 1rem;
@@ -48,6 +84,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         .login-link a:hover {
             text-decoration: underline;
+        }
+        .error {
+            color: red;
+            text-align: center;
         }
     </style>
 </head>

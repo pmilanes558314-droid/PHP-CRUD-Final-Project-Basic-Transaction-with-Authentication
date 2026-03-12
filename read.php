@@ -24,6 +24,36 @@ $transactions = $stmt->fetchAll();
 <head>
     <meta charset="UTF-8">
     <title>Transactions | Financial Tracker</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            display: flex;
+        }
+        .sidebar {
+            width: 220px;
+            background: #2c3e50;
+            color: #fff;
+            padding: 1.5rem;
+            height: 100vh;
+        }
+        .sidebar h2 {
+            margin-bottom: 1.5rem;
+        }
+        .sidebar a {
+            display: block;
+            color: #ecf0f1;
+            text-decoration: none;
+            margin: 0.5rem 0;
+        }
+        .sidebar a:hover {
+            color: #3498db;
+        }
+        .main {
+            flex: 1;
+            padding: 2rem;
+        }
         h2 {
             color: #2c3e50;
             margin-bottom: 1.5rem;
@@ -47,6 +77,9 @@ $transactions = $stmt->fetchAll();
         }
         tr:nth-child(even) {
             background: #f9f9f9;
+        }
+        tr:hover {
+            background: #eef6fc;
         }
         .actions a {
             margin-right: 0.5rem;
@@ -88,7 +121,7 @@ $transactions = $stmt->fetchAll();
             <?php foreach ($transactions as $t): ?>
             <tr>
                 <td><?= htmlspecialchars($t['transaction_date']) ?></td>
-                <td><?= ucfirst($t['category']) ?></td>
+                <td><?= ucfirst(htmlspecialchars($t['category'])) ?></td>
                 <td><?= htmlspecialchars($t['description']) ?></td>
                 <td>₱<?= number_format($t['amount'], 2) ?></td>
                 <?php if ($_SESSION['role'] == 'admin'): ?>

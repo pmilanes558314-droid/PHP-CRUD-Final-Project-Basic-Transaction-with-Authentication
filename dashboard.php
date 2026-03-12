@@ -9,8 +9,8 @@ if (!isset($_SESSION['user_id'])) {
 
 $stmt = $pdo->prepare("
     SELECT
-        SUM(CASE WHEN category='income' THEN amount ELSE 0 END) AS total_income,
-        SUM(CASE WHEN category='expense' THEN amount ELSE 0 END) AS total_expense
+        COALESCE(SUM(CASE WHEN category='income' THEN amount ELSE 0 END),0) AS total_income,
+        COALESCE(SUM(CASE WHEN category='expense' THEN amount ELSE 0 END),0) AS total_expense
     FROM transactions WHERE user_id = ?
 ");
 $stmt->execute([$_SESSION['user_id']]);
@@ -23,6 +23,36 @@ $balance = $data['total_income'] - $data['total_expense'];
 <head>
     <meta charset="UTF-8">
     <title>Dashboard | Financial Tracker</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            display: flex;
+        }
+        .sidebar {
+            width: 220px;
+            background: #2c3e50;
+            color: #fff;
+            padding: 1.5rem;
+            height: 100vh;
+        }
+        .sidebar h2 {
+            margin-bottom: 1.5rem;
+        }
+        .sidebar a {
+            display: block;
+            color: #ecf0f1;
+            text-decoration: none;
+            margin: 0.5rem 0;
+        }
+        .sidebar a:hover {
+            color: #3498db;
+        }
+        .main {
+            flex: 1;
+            padding: 2rem;
+        }
         .header {
             display: flex;
             justify-content: space-between;
